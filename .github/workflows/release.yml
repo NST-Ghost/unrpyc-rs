@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build - ${{ matrix.platform.os }}
@@ -15,12 +18,15 @@ jobs:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             binary_name: unrpyc_rs
+            extension: tar.gz
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             binary_name: unrpyc_rs.exe
+            extension: zip
           - os: macos-latest
             target: x86_64-apple-darwin
             binary_name: unrpyc_rs
+            extension: tar.gz
 
     steps:
       - name: Checkout code
@@ -38,19 +44,17 @@ jobs:
         shell: bash
         run: |
           mkdir dist
-          if [ "${{ matrix.platform.os }}" = "windows-latest" ]; then
-            cp target/${{ matrix.platform.target }}/release/${{ matrix.platform.binary_name }} dist/
-            cd dist && zip ../unrpyc_rs-${{ matrix.platform.target }}.zip ${{ matrix.platform.binary_name }}
+          cp target/${{ matrix.platform.target }}/release/${{ matrix.platform.binary_name }} dist/
+          cd dist
+          if [ "${{ matrix.platform.extension }}" = "zip" ]; then
+            zip ../unrpyc_rs-${{ matrix.platform.target }}.zip ${{ matrix.platform.binary_name }}
           else
-            cp target/${{ matrix.platform.target }}/release/${{ matrix.platform.binary_name }} dist/
-            cd dist && tar -czf ../unrpyc_rs-${{ matrix.platform.target }}.tar.gz ${{ matrix.platform.binary_name }}
+            tar -czf ../unrpyc_rs-${{ matrix.platform.target }}.tar.gz ${{ matrix.platform.binary_name }}
           fi
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            unrpyc_rs-${{ matrix.platform.target }}.zip
-            unrpyc_rs-${{ matrix.platform.target }}.tar.gz
+          files: unrpyc_rs-${{ matrix.platform.target }}.${{ matrix.platform.extension }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

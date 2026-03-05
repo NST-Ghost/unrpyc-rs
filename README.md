@@ -12,13 +12,13 @@ A high-performance Ren'Py decompiler and RPA archive extractor written in Rust. 
 ## Installation
 
 ### From Releases
-Download the pre-compiled binaries for your platform (Linux, Windows, macOS) from the [Releases](https://github.com/your-username/unrpyc-rs/releases) page.
+Download the pre-compiled binaries for your platform (Linux, Windows, macOS) from the [Releases](https://github.com/NST-Ghost/unrpyc-rs/releases) page.
 
 ### Building from Source
 Ensure you have the [Rust toolchain](https://rustup.rs/) installed:
 
 ```bash
-git clone https://github.com/your-username/unrpyc-rs.git
+git clone https://github.com/NST-Ghost/unrpyc-rs.git
 cd unrpyc-rs
 cargo build --release
 ```
@@ -56,7 +56,7 @@ unrpyc_rs --dump path/to/script.rpyc
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-unrpyc_rs = { git = "https://github.com/your-username/unrpyc-rs.git" }
+unrpyc_rs = { git = "hhttps://github.com/NST-Ghost//unrpyc-rs.git" }
 ```
 
 ### As a C-Compatible Library (FFI)
