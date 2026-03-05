@@ -47,7 +47,7 @@ jobs:
           cp target/${{ matrix.platform.target }}/release/${{ matrix.platform.binary_name }} dist/
           cd dist
           if [ "${{ matrix.platform.extension }}" = "zip" ]; then
-            zip ../unrpyc_rs-${{ matrix.platform.target }}.zip ${{ matrix.platform.binary_name }}
+            7z a ../unrpyc_rs-${{ matrix.platform.target }}.zip ${{ matrix.platform.binary_name }}
           else
             tar -czf ../unrpyc_rs-${{ matrix.platform.target }}.tar.gz ${{ matrix.platform.binary_name }}
           fi
