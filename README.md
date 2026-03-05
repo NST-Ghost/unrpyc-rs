@@ -28,7 +28,14 @@ The binary will be located at `target/release/unrpyc_rs`.
 
 ### Decompile .rpyc
 ```bash
+# Process a single file
 unrpyc_rs path/to/script.rpyc
+
+# Process all .rpyc files in a folder
+unrpyc_rs path/to/game/game/
+
+# Process all .rpyc files in a folder and its subfolders
+unrpyc_rs path/to/game/game/ --recursive
 ```
 *Note: Currently outputs the internal AST structure to the console. Full .rpy source generation is under development.*
 
